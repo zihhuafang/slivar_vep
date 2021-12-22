@@ -50,9 +50,13 @@ RUN cd / && \
     ldconfig && \
     source scl_source enable devtoolset-2 && \
     export PATH=/nim/bin:$PATH && \
-    git clone https://github.com/iffy/nim-argparse && cd nim-argparse && git checkout v0.10.1 && nimble install -y && \
+    git clone https://github.com/iffy/nim-argparse && \
+    cd nim-argparse && \
+    git checkout v0.10.1 && \
+    nimble install -y && \
     cd .. && rm -rf nim-argparse && \
     git clone --depth 1 git://github.com/zihhuafang/slivar_vep105 && \
+    mv slivar_vep105 slivar && \
     cd slivar && \
     sed -i 's/-no-pie//' nim.cfg && \
     nimble install -y &&  \
