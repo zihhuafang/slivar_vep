@@ -290,7 +290,7 @@ or gene->pLI with:
   tsv_header.add("depths" & extra)
   tsv_header.add("allele_balance" & extra)
   if opts.csq_field != "":
-    tsv_header.add("gene_impact_transcript")
+    tsv_header.add("gene;impact;transcript")
 
     if opts.csq_column.len > 0:
       tsv_header[tsv_header.high] &= ";" & join(opts.csq_column,  ";")
