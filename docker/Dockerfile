@@ -52,7 +52,8 @@ RUN cd / && \
     export PATH=/nim/bin:$PATH && \
     git clone https://github.com/iffy/nim-argparse && cd nim-argparse && git checkout v0.10.1 && nimble install -y && \
     cd .. && rm -rf nim-argparse && \
-    git clone --depth 1 https://github.com/brentp/slivar.git && \
+    git clone --depth 1 git://github.com/zihhuafang/slivar_vep && \
+    mv slivar_vep slivar && \
     cd slivar && \
     sed -i 's/-no-pie//' nim.cfg && \
     nimble install -y &&  \
