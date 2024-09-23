@@ -43,7 +43,7 @@ proc is_compound_het*(kid: pedfile.Sample, a:openarray[int8], b:openarray[int8],
       return (a[p.i] == 0 and b[p.i] == 1) or (a[p.i] == 1 and b[p.i] == 0)
 
 
-  doAssert kid.dad != nil and kid.mom != nil and kid.dad.i != -1 and kid.mom.i != -1
+  doAssert kid.dad != nil and kid.mom != nil and kid.dad.i != -1 and kid.mom.i != -1, $(kid, kid.dad, kid.mom)
 
   if a[kid.dad.i] == -1 or a[kid.mom.i] == -1: return false
   if b[kid.dad.i] == -1 or b[kid.mom.i] == -1: return false
@@ -222,8 +222,8 @@ proc main*(dropfirst:bool=false) =
     if f == "": continue
     try:
       var gf:GeneIndexes
-      ivcf.set_csq_fields(f, gf)
-      gene_fields.add(gf)
+      if ivcf.set_csq_fields(f, gf).len > 0:
+        gene_fields.add(gf)
       # add this to the field names so we can clear it as needed
     except KeyError:
       continue
@@ -281,6 +281,9 @@ proc main*(dropfirst:bool=false) =
       var seen = initHashSet[string]()
       for csq in csqs.split(','):
         var fields = csq.split('|')
+        if max(g.gene, g.consequence) >= fields.len:
+          stderr.write_line &"[slivar] warning! {g.csq_field} has a CSQ of {csq} which is incomplete. skipping {v.CHROM}:{v.start + 1}({v.REF}/{v.ALT[0]})"
+          continue
         var gene = fields[g.gene]
         if gene == "": continue
         if gene in seen: continue

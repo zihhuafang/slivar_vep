@@ -18,9 +18,6 @@ conservative_inframe_insertion
 conservative_inframe_deletion
 protein_altering
 inframe_altering
-splice_polypyrimidine_tract
-splice_donor_5th_base
-splice_donor_region
 splice_region
 structural_interaction_variant
 bidirectional_gene_fusion
@@ -41,6 +38,9 @@ mature_miRNA
 5_prime_UTR
 3_prime_UTR
 initiator_codon
+splice_donor_5th_base
+splice_polypyrimidine_tract
+splice_donor_region
 miRNA
 non_coding_transcript_exon
 non_coding_exon

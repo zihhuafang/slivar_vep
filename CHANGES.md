@@ -1,7 +1,24 @@
+v0.3.1
+======
++ add CSQ parsing js code: https://github.com/brentp/slivar/wiki/CSQ
++ expose sample.GT
++ update impact order to include new effects from VEP (#157)
+
+v0.3.0
+======
++ bugfix for 0.2.8 regression where SNPs present in gnotate file would be instead annotated as missing #149.
+  This happened when annotating a chromosome *after* a chromosome present in the query set that was not in the gnotate file
+
+v0.2.9
+======
++ bugfix for 0.2.8 regression where indels present in gnotate file would be instead annotated as missing #149
+
 v0.2.8
 ======
 + [internal] use same zip library for make-gnotate as gnotate. this should
   improve speed for reading many small chromosomes.
++ don't quit on CSQ/ANN/BCSQ fields that don't have enough information to parse (#122)
++ fix segregating_dominant_x
 
 v0.2.7
 ======

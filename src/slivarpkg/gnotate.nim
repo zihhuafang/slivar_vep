@@ -101,6 +101,7 @@ proc parseLong(line: string, n_fields:int): Long {.inline.} =
 
 
 proc readLongs(g:var Gnotater, chrom: string) =
+  g.longs.setLen(0)
 
   var big = newString(16)
   doAssert g.zip.read_into(&"sli.var/{chrom}/long-alleles.txt", big)
@@ -116,6 +117,9 @@ proc readEncs(g:var Gnotater, chrom: string) =
 
 proc readValues(g: var Gnotater, chrom: string, field_i: int) =
   var field_name = g.names[field_i]
+  if field_i > g.values.high:
+    # if we encounter a new chromosome after an empty one.
+    g.values.setLen(field_i + 1)
   # gnotate-gnomad_num_homalt.bin
   shallow(g.values)
   doAssert g.zip.readInto(&"sli.var/{chrom}/gnotate-{field_name}.bin", g.values[field_i])

@@ -28,7 +28,7 @@ slivar has sub-commands:
 # Table of Contents
 
 * [Installation](#installation)
-* [QuickStart](#QuickStart)
+* [QuickStart](#quickstart)
 * [Commands](#commands)
  * [expr](#expr)
     * [trio](#trio)
@@ -64,7 +64,7 @@ So for hg38:
 ```
 vcf=/path/to/your/vcf.vcf.gz
 ped=/path/to/your/pedigree.ped
-wget https://github.com/brentp/slivar/releases/download/v0.1.11/slivar
+wget https://github.com/brentp/slivar/releases/download/v0.2.8/slivar
 chmod +x ./slivar
 wget https://raw.githubusercontent.com/brentp/slivar/master/js/slivar-functions.js
 wget https://slivar.s3.amazonaws.com/gnomad.hg38.genomes.v3.fix.zip
@@ -78,6 +78,8 @@ wget https://slivar.s3.amazonaws.com/gnomad.hg38.genomes.v3.fix.zip
 	--trio "custom:kid.het && mom.het && dad.het && kid.GQ > 20 && mom.GQ > 20 && dad.GQ > 20" \
 	--pass-only
 ```
+
+The pedigree format is explained [here](https://github.com/brentp/slivar/wiki/pedigree-file)
 
 ## Commands
 
@@ -291,8 +293,9 @@ See [the wiki](https://github.com/brentp/slivar/wiki/data-driven-cutoffs) for mo
 
 ## Attributes
 
- + anything in the INFO is available as e.g. INFO.CSQ
+ + anything in the INFO is available as e.g. INFO.DP
  + INFO.impactful which, if CSQ (VEP), BCSQ (bcftools), or ANN (snpEff) is present indicates if the highest impact is "impactful". see [wiki](https://github.com/brentp/slivar/wiki/impactful) and `INFO.genic` which includes other gene impacts like `synonymous`. Also `INFO.highest_impact_order` explained in the wiki
+ + variant consequences such as in INFO.CSQ can be parsed and used as object as described [here](https://github.com/brentp/slivar/wiki/CSQ)
  + if FORMAT.AB is not present, it is added so one can filter with kid.AB > 0.25 && kid.AB < 0.75
  + variant attributes are: `CHROM`, `POS`, `start`, `end`, `ID`, `REF`, `ALT`, `QUAL`, `FILTER`,
                            `is_multiallelic`
