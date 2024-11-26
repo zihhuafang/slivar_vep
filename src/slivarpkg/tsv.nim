@@ -154,9 +154,9 @@ proc get_gene_info(v:Variant, csq_field_name:string, gene_fields:GeneIndexes, ju
     var toks = tr.split('|')
     var key = toks[gene_fields.gene].strip()
     if not just_gene:
-      key &= "/" & toks[gene_fields.consequence] & "/" & toks[gene_fields.transcript]
+      key &= ";" & toks[gene_fields.consequence] & ";" & toks[gene_fields.transcript]
       for c, ci in gene_fields.columns:
-        key &= "/" & (if ci < toks.len: toks[ci] else: "")
+        key &= ";" & (if ci < toks.len: toks[ci] else: "")
     if key.strip().len == 0 or key in result: continue
     result.add(key)
 
